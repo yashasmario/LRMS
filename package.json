@@ -1,21 +1,25 @@
 {
   "name": "lrms",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Library Resource Management System — A modern web application for managing library books, borrowing, returns, reservations, and renewals.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yashasmario/LRMS.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["library", "management", "books", "lrms"],
+  "author": "Yashas V. Kumar",
+  "license": "MIT",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/yashasmario/LRMS/issues"
-  },
-  "homepage": "https://github.com/yashasmario/LRMS#readme"
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2"
+  }
 }
