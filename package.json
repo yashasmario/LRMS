@@ -12,7 +12,7 @@
     "url": "git+https://github.com/yashasmario/LRMS.git"
   },
   "keywords": ["library", "management", "books", "lrms"],
-  "author": "Yashas V. Kumar",
+  "author": "",
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
