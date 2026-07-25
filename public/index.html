@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Library Resource Management System — Manage books, borrowing, returns, reservations and renewals with a modern digital solution.">
+  <title>LRMS — Library Resource Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Auth Screen -->
+  <div id="auth-screen" class="screen active">
+    <div class="auth-bg">
+      <div class="auth-orb auth-orb-1"></div>
+      <div class="auth-orb auth-orb-2"></div>
+      <div class="auth-orb auth-orb-3"></div>
+    </div>
+    <div class="auth-container">
+      <div class="auth-card glass">
+        <div class="auth-logo">
+          <span class="material-symbols-rounded logo-icon">local_library</span>
+          <h1>LRMS</h1>
+          <p>Library Resource Management System</p>
+        </div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login" id="tab-login">Sign In</button>
+          <button class="auth-tab" data-tab="register" id="tab-register">Register</button>
+        </div>
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <span class="material-symbols-rounded">person</span>
+            <input type="text" id="login-username" placeholder="Username" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <span class="material-symbols-rounded">lock</span>
+            <input type="password" id="login-password" placeholder="Password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+            <span>Sign In</span>
+            <span class="material-symbols-rounded">arrow_forward</span>
+          </button>
+          <div class="auth-hint">
+            <p>Demo: <strong>admin / admin123</strong> or <strong>demo / user123</strong></p>
+          </div>
+        </form>
+        <form id="register-form" class="auth-form hidden">
+          <div class="form-group">
+            <span class="material-symbols-rounded">badge</span>
+            <input type="text" id="reg-fullname" placeholder="Full Name" required>
+          </div>
+          <div class="form-group">
+            <span class="material-symbols-rounded">person</span>
+            <input type="text" id="reg-username" placeholder="Username" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <span class="material-symbols-rounded">mail</span>
+            <input type="email" id="reg-email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <span class="material-symbols-rounded">lock</span>
+            <input type="password" id="reg-password" placeholder="Password" required autocomplete="new-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="register-btn">
+            <span>Create Account</span>
+            <span class="material-symbols-rounded">arrow_forward</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app-screen" class="screen">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar glass">
+      <div class="sidebar-logo">
+        <span class="material-symbols-rounded logo-icon">local_library</span>
+        <span class="sidebar-title">LRMS</span>
+      </div>
+      <div class="sidebar-nav">
+        <button class="nav-item active" data-view="dashboard" id="nav-dashboard">
+          <span class="material-symbols-rounded">dashboard</span>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="catalog" id="nav-catalog">
+          <span class="material-symbols-rounded">library_books</span>
+          <span>Catalog</span>
+        </button>
+        <button class="nav-item" data-view="my-books" id="nav-my-books">
+          <span class="material-symbols-rounded">menu_book</span>
+          <span>My Books</span>
+        </button>
+        <button class="nav-item" data-view="reservations" id="nav-reservations">
+          <span class="material-symbols-rounded">bookmark</span>
+          <span>Reservations</span>
+        </button>
+        <!-- Admin only -->
+        <div id="admin-nav" class="hidden">
+          <div class="nav-divider"></div>
+          <span class="nav-label">Admin</span>
+          <button class="nav-item" data-view="manage-books" id="nav-manage-books">
+            <span class="material-symbols-rounded">edit_note</span>
+            <span>Manage Books</span>
+          </button>
+          <button class="nav-item" data-view="all-borrows" id="nav-all-borrows">
+            <span class="material-symbols-rounded">swap_horiz</span>
+            <span>All Borrows</span>
+          </button>
+          <button class="nav-item" data-view="all-reservations" id="nav-all-reservations">
+            <span class="material-symbols-rounded">pending_actions</span>
+            <span>All Reservations</span>
+          </button>
+          <button class="nav-item" data-view="users" id="nav-users">
+            <span class="material-symbols-rounded">group</span>
+            <span>Users</span>
+          </button>
+        </div>
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-badge" id="user-badge">
+          <div class="user-avatar" id="user-avatar">U</div>
+          <div class="user-info">
+            <span class="user-name" id="user-name">User</span>
+            <span class="user-role" id="user-role">Member</span>
+          </div>
+        </div>
+        <button class="btn-icon" id="logout-btn" title="Logout">
+          <span class="material-symbols-rounded">logout</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main id="main-content" class="main-content">
+      <!-- Top bar -->
+      <header class="topbar">
+        <button class="btn-icon sidebar-toggle" id="sidebar-toggle">
+          <span class="material-symbols-rounded">menu</span>
+        </button>
+        <h2 id="page-title">Dashboard</h2>
+        <div class="topbar-actions">
+          <div class="search-global" id="global-search-container" style="display:none;">
+            <span class="material-symbols-rounded">search</span>
+            <input type="text" id="global-search" placeholder="Search books...">
+          </div>
+        </div>
+      </header>
+
+      <!-- Views -->
+      <div class="view-container">
+        <!-- Dashboard -->
+        <section id="view-dashboard" class="view active">
+          <div class="dashboard-grid" id="dashboard-content">
+            <!-- Filled by JS -->
+          </div>
+        </section>
+
+        <!-- Catalog -->
+        <section id="view-catalog" class="view">
+          <div class="catalog-controls">
+            <div class="search-bar">
+              <span class="material-symbols-rounded">search</span>
+              <input type="text" id="catalog-search" placeholder="Search by title, author, or ISBN...">
+            </div>
+            <select id="catalog-filter" class="select-styled">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+          <div class="book-grid" id="book-grid">
+            <!-- Filled by JS -->
+          </div>
+        </section>
+
+        <!-- My Books -->
+        <section id="view-my-books" class="view">
+          <div class="table-container" id="my-books-content">
+            <!-- Filled by JS -->
+          </div>
+        </section>
+
+        <!-- Reservations -->
+        <section id="view-reservations" class="view">
+          <div class="table-container" id="my-reservations-content">
+            <!-- Filled by JS -->
+          </div>
+        </section>
+
+        <!-- Admin: Manage Books -->
+        <section id="view-manage-books" class="view">
+          <div class="section-header">
+            <h3>Book Inventory</h3>
+            <button class="btn btn-primary" id="add-book-btn">
+              <span class="material-symbols-rounded">add</span>
+              <span>Add Book</span>
+            </button>
+          </div>
+          <div class="table-container" id="manage-books-content">
+            <!-- Filled by JS -->
+          </div>
+        </section>
+
+        <!-- Admin: All Borrows -->
+        <section id="view-all-borrows" class="view">
+          <div class="table-container" id="all-borrows-content">
+            <!-- Filled by JS -->
+          </div>
+        </section>
+
+        <!-- Admin: All Reservations -->
+        <section id="view-all-reservations" class="view">
+          <div class="table-container" id="all-reservations-content">
+            <!-- Filled by JS -->
+          </div>
+        </section>
+
+        <!-- Admin: Users -->
+        <section id="view-users" class="view">
+          <div class="table-container" id="users-content">
+            <!-- Filled by JS -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal overlay -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal glass" id="modal">
+      <div class="modal-header">
+        <h3 id="modal-title">Modal</h3>
+        <button class="btn-icon modal-close" id="modal-close">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Dynamic content -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
