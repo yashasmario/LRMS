@@ -2,6 +2,26 @@
 
 A full-stack web application for managing library operations — book cataloging, borrowing, returns, reservations, and renewals.
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/login.png" alt="Login Page" width="800">
+  <br>
+  <em>Clean, minimal login screen</em>
+</p>
+
+<p align="center">
+  <img src="screenshots/dashboard.png" alt="Admin Dashboard" width="800">
+  <br>
+  <em>Admin dashboard with real-time stats and activity</em>
+</p>
+
+<p align="center">
+  <img src="screenshots/catalog.png" alt="Book Catalog" width="800">
+  <br>
+  <em>Book catalog with availability tracking</em>
+</p>
+
 ## Features
 
 **Users** can search and browse the catalog, borrow and return books, renew loans (up to 2 times), place reservations on unavailable books, and view their borrowing history.
